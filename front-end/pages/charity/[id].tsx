@@ -2,20 +2,25 @@ import { Button } from '@heathmont/moon-core-tw';
 import { ControlsPlus, GenericUsers } from '@heathmont/moon-icons-tw';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Loader from '../components/components/Loader';
-import DAOCard from '../components/components/DaoCard';
-import EmptyState from '../components/components/EmptyState';
-import CreateDaoModal from '../features/CreateCommunity';
+import Loader from '../../components/components/Loader';
+import DAOCard from '../../components/components/DaoCard';
+import EmptyState from '../../components/components/EmptyState';
+import CreateDaoModal from '../../features/CreateCommunity';
 import { useRouter } from 'next/router';
-import {getAllCommunities, create_community} from '../services/sorobanService'
+import {getAllCommunities, create_community} from '../../services/sorobanService'
 declare let window;
-import ListData from '../components/data/charities.json'
-export const Joined = () => {
-  const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showCreateDaoModal, setShowCreateDaoModal] = useState(false);
+import ListData from '../../components/data/charities.json'
+import { log } from 'console';
 
+export const Charity = () => {
   const router = useRouter();
+  const { id } = router.query;
+  console.log("router",router.query.id);
+  
+  const [list, setList] = useState([]);
+
+
+  
 
   useEffect(() => {
     fetchContractData();
@@ -23,44 +28,6 @@ export const Joined = () => {
   }, []);
   // }, [contract, api]);
 
-  async function fetchContractData() {
-    setLoading(true);
-    getAllCommunities();
-    create_community();
-    // try {
-    //   if (contract && api) {
-    //     let allDaos = (await GetAllDaos()) as any as Dao[];
-    //     let allJoined = (await GetAllJoined()) as any as JOINED[];
-
-    //     const arrList = [];
-
-    //     allJoined.forEach((joined_dao) => {
-    //       let foundDao = (allDaos as any).filter((e) => e?.daoId == joined_dao.daoId?.toString());
-    //       if (joined_dao.user_id.toString() == window.userid.toString() && foundDao.length > 0) {
-    //         arrList.push(foundDao[0]);
-    //       }
-    //     });
-
-    //     if (arrList.length === 0) {
-    //       router.push('/daos');
-    //     }
-
-    //     setList(arrList.reverse());
-    //   }
-    // } catch (error) {
-    //   console.error('ERR', error);
-    // }
-
-    setLoading(false);
-  }
-
-  function closeModal() {
-    setShowCreateDaoModal(false);
-  }
-
-  function openModal() {
-    setShowCreateDaoModal(true);
-  }
 
   return (
     <>
@@ -89,4 +56,4 @@ export const Joined = () => {
   );
 };
 
-export default Joined;
+export default Charity;
