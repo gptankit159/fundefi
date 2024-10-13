@@ -4,7 +4,7 @@ import { Button } from '@heathmont/moon-core-tw';
 import { SoftwareLogin } from '@heathmont/moon-icons-tw';
 import UseFormInput from '../UseFormInput';
 import { toast } from 'react-toastify';
-import userData from "../../../usersData";
+import userData from "../../data/usersData.json";
 import FreighterLogin from '../../../services/freighterService'
 const LoginCard = () => {
 
